@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Past Simple - Mobile ESL Lesson</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 10px;
+        }
+
+        .slide {
+            display: none;
+            padding: 20px;
+            text-align: center;
+            min-height: 90vh;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Slide 1 */
+        .slide1 h1 {
+            font-size: 2.5rem;
+            margin: 40px 0 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .slide1 h2 {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .info-box {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Slide 2 */
+        .rule-card {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 1.1rem;
+        }
+
+        .rule-card strong {
+            color: #FFD700;
+        }
+
+        /* Slide 3 */
+        .exercise {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .question {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .answer-btn {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 12px 20px;
+            margin: 8px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            min-width: 80px;
+        }
+
+        .answer-btn:hover, .answer-btn:active {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.05);
+        }
+
+        .answer-btn.correct {
+            background: #4CAF50;
+            border-color: #45a049;
+        }
+
+        .answer-btn.incorrect {
+            background: #f44336;
+            border-color: #da190b;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            min-height: 20px;
+        }
+
+        .feedback.correct {
+            background: rgba(76, 175, 80, 0.3);
+            color: #4CAF50;
+        }
+
+        .feedback.incorrect {
+            background: rgba(244, 67, 54, 0.3);
+            color: #f44336;
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            background: rgba(0,0,0,0.3);
+            padding: 10px;
+            border-radius: 25px;
+        }
+
+        .nav-btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover, .nav-btn:active {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.3);
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            .slide1 h1 {
+                font-size: 2rem;
+            }
+            
+            .slide1 h2 {
+                font-size: 1.2rem;
+            }
+            
+            .answer-btn {
+                display: block;
+                width: 90%;
+                margin: 10px auto;
+            }
+            
+            .nav-btn {
+                padding: 12px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-counter">
+        <span id="current">1</span> / 3
+    </div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active" id="slide1">
+        <h1>📚 Past Simple</h1>
+        <h2>English Grammar Lesson</h2>
+        <div class="info-box">
+            <p style="font-size: 1.2rem;">Interactive English Grammar</p>
+            <p>Beginner Level</p>
+            <p style="margin-top: 10px;">👆 Tap Next to start!</p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Grammar Rules -->
+    <div class="slide" id="slide2">
+        <h2 style="margin-bottom: 30px;">📝 Past Simple Rules</h2>
+        
+        <div class="rule-card">
+            <strong>Regular verbs:</strong> add -ed<br>
+            <small>walk → walked, play → played</small>
+        </div>
+        
+        <div class="rule-card">
+            <strong>Irregular verbs:</strong> special forms<br>
+            <small>go → went, see → saw</small>
+        </div>
+        
+        <div class="rule-card">
+            <strong>Time words:</strong><br>
+            <small>yesterday, last week, ago</small>
+        </div>
+    </div>
+
+    <!-- Slide 3: Practice -->
+    <div class="slide" id="slide3">
+        <h2 style="margin-bottom: 20px;">🎯 Practice Time!</h2>
+        
+        <div class="exercise">
+            <div class="question">Yesterday, I _____ to school.</div>
+            <button class="answer-btn" onclick="checkAnswer(this, false, 'go')">go</button>
+            <button class="answer-btn" onclick="checkAnswer(this, true, 'went')">went</button>
+            <div class="feedback" id="feedback1"></div>
+        </div>
+
+        <div class="exercise">
+            <div class="question">She _____ TV last night.</div>
+            <button class="answer-btn" onclick="checkAnswer(this, false, 'watch')">watch</button>
+            <button class="answer-btn" onclick="checkAnswer(this, true, 'watched')">watched</button>
+            <div class="feedback" id="feedback2"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <button class="nav-btn" onclick="prevSlide()" id="prevBtn">← Back</button>
+        <button class="nav-btn" onclick="nextSlide()" id="nextBtn">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 3;
+
+        function showSlide(n) {
+            // Hide all slides
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Show current slide
+            document.getElementById(`slide${n}`).classList.add('active');
+            
+            // Update counter
+            document.getElementById('current').textContent = n;
+            
+            // Update buttons
+            document.getElementById('prevBtn').disabled = (n === 1);
+            document.getElementById('nextBtn').disabled = (n === totalSlides);
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        function checkAnswer(button, isCorrect, answer) {
+            const exercise = button.parentElement;
+            const feedback = exercise.querySelector('.feedback');
+            const allButtons = exercise.querySelectorAll('.answer-btn');
+            
+            // Reset all buttons
+            allButtons.forEach(btn => {
+                btn.classList.remove('correct', 'incorrect');
+            });
+            
+            if (isCorrect) {
+                button.classList.add('correct');
+                feedback.textContent = `✅ Great! "${answer}" is correct!`;
+                feedback.className = 'feedback correct';
+            } else {
+                button.classList.add('incorrect');
+                feedback.textContent = `❌ Try again! Think about past tense.`;
+                feedback.className = 'feedback incorrect';
+            }
+            
+            // Disable buttons after answer
+            setTimeout(() => {
+                allButtons.forEach(btn => {
+                    btn.style.pointerEvents = 'none';
+                });
+            }, 1000);
+        }
+
+        // Touch/swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(event) {
+            touchStartX = event.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(event) {
+            touchEndX = event.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const swipeLength = touchEndX - touchStartX;
+            
+            if (Math.abs(swipeLength) > swipeThreshold) {
+                if (swipeLength > 0) {
+                    // Swipe right = previous
+                    prevSlide();
+                } else {
+                    // Swipe left = next
+                    nextSlide();
+                }
+            }
+        }
+
+        // Initialize
+        showSlide(1);
+    </script>
+</body>
+</html>
